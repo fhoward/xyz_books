@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyText
+  isbn_13: MyText
+  price: 9.99
+  publication_year: 2023-02-28 18:03:24
+  image_url: MyString
+  edition: MyString
+  publisher: one
+
+two:
+  title: MyText
+  isbn_13: MyText
+  price: 9.99
+  publication_year: 2023-02-28 18:03:24
+  image_url: MyString
+  edition: MyString
+  publisher: two
