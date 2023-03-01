@@ -14,6 +14,5 @@ RSpec.describe Book, type: :model do
     it { should validate_presence_of(:publication_year) }
     it { should validate_presence_of(:publisher_id) }
     it { should validate_presence_of(:authors).with_message("must have at least one author") }
-
   end
 end
