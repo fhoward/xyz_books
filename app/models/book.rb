@@ -11,4 +11,12 @@ class Book < ApplicationRecord
   validates_uniqueness_of :title,:isbn_13,case_sensitive: false
 
   attr_accessor :isbn_10
+
+  before_save :format_isbn
+
+  def format_isbn
+    self.isbn_13 = isbn_13.gsub("-","")
+  end
+
+
 end
