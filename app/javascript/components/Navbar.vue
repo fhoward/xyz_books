@@ -7,7 +7,7 @@
           </div>
           
           <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-            <input type="search" class="form-control form-control-light text-bg-light" placeholder="Search..." aria-label="Search">
+            <input type="search" class="form-control form-control-light text-bg-light form-rounded" placeholder="Search..." aria-label="Search">
           </form>
   
           <ul class="nav col-12 col-lg-auto ms-lg-auto mb-2 justify-content-center mb-md-0">
@@ -40,5 +40,9 @@ export default {
 <style>
 .navbar{
     height: 80px;
+}
+
+.form-rounded {
+    border-radius: 1rem;
 }
 </style>
