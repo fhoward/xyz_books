@@ -1,4 +1,4 @@
-class BooksController < ApplicationController
+class Api::BooksController < Api::ApplicationController
   before_action :find_book,only: :show
   # All authors of the book should be combined and provided as a single, comma-separated string (e.g., “author 1, author 2, author 3”).
   # The publisher’s name should be provided as an unnested object.
