@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  get '/books', to: 'books#index'
-  get '/books/:isbn_13', to: 'books#show' 
-  get 'convert_isbn', to: 'books#convert_isbn'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  root to: 'home#index'
+  get '/search', to: 'home#search'
+  namespace :api do
+    get '/books', to: 'books#index'
+    get '/books/:isbn_13', to: 'books#show' 
+    get 'convert_isbn', to: 'books#convert_isbn'
+  end
 end
