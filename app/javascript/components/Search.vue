@@ -42,7 +42,7 @@ computed: {
   height: 500px;
   width: 400px;
 }
-span{
+h5 span{
   color: blue;
 }
 </style>

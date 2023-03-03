@@ -156,7 +156,7 @@ export default {
         axios.get('http://localhost:5100/api/books/' + isbn, null).then((response) => {
           this.book = response.data.data
         }).catch((e) => {
-          console.log(e)
+          alert('Book Not Found')
         })
       }else{
         alert('Invalid ISBN')
