@@ -4,7 +4,7 @@ class Api::BooksController < Api::ApplicationController
   # The publisher’s name should be provided as an unnested object.
   
   def index
-    @books = Book.all
+    @books = Book.all&.limit(params[:limit])
     # use convert to isbn10 since isbn13 is present on database
     # use the converted isbn10 to convert to isbn13
     @books.map{ |i| i.isbn_10 = convert_to_isbn_10(i.isbn_13) }
@@ -61,9 +61,11 @@ class Api::BooksController < Api::ApplicationController
     return false unless isbn.length == 13
     return false unless isbn.match?(/^978\d{10}$/)
 
-    # calculate last digit and check last digit if valid equal 10 or 0
+    # calculate last digit and check last digit if valid
     _check_digit = last_digit_isbn_13(isbn)
-    _check_digit == 10 ? 0 : _check_digit
+    # _check_digit == '10' ? 0 : _check_digit
+    return false unless (0...9) ===  _check_digit.to_i
+    return true
   end
 
   def check_isbn_10(isbn)
@@ -72,9 +74,11 @@ class Api::BooksController < Api::ApplicationController
       return false unless isbn.length == 10
       return false unless isbn.match?(/^(\d{9}[\d|X])$/)
 
-      # calculate last digit and check last digit if valid if its X or 0
+      # calculate last digit and check last digit if valid
       _check_digit = last_digit_isbn_10(isbn)
       _check_digit == 'X' ? 0 : _check_digit
+      return false unless (0...9) === _check_digit.to_i
+      return true
   end
 
   def convert_to_isbn_10(isbn_13)

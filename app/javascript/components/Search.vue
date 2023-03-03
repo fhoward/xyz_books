@@ -1,44 +1,48 @@
 <template>  
-    <div :style="homeStyle">
-      <Header></Header>
-      <Navbar></Navbar>
-      <div class="container text-center">
-        <div class="row">
-          <div class="col">
-            Columnas
-          </div>
-          <div class="col">
-            Cols
-          </div>
+    <div class="container">
+      <div class="row row-1 align-items-center">
+        <div class="col ">
+          <img :src="book.attributes.image_url" class="book-image img-thumbnail">
+        </div>
+        <div class="col text-left">
+          <h2>{{book.attributes.title}}</h2>
+          <br/>
+          <h5>By {{ book.attributes.authors }}</h5>
+          <br/>
+          <h5>Edition: <span> {{ book.attributes.edition }} </span> </h5>
+          <h5>Price: <span>{{ book.attributes.price }}</span> </h5>
+          <h5>ISBN: <span> {{ book.attributes.isbn_13 }}</span> </h5>
+          <h5>Publication Year: <span> {{ book.attributes.publication_year }} </span> </h5>
+          <h5>Publisher: <span> {{ book.attributes.publisher_name }} </span> </h5>
+          
         </div>
       </div>
     </div>
 </template>  
   
 <script>  
-import Header from './Header.vue'
-import bgImage from '../assets/image/banner.png'
-import Navbar from './Navbar.vue'
 
 export default { 
 components:{
-    Header,
-    Navbar
+
 },
+props: ['book'],
 data() {  
     return {  
-    bgImage
+
     }  
 },
 computed: {
-    homeStyle(){
-        return {
-            backgroundImage: `url(${this.bgImage})`,
-            backgroundSize: 'cover',
-            width: '100vw',
-            height: '200vh'
-        }
-    }
+
 } 
 }  
 </script>  
+<style>
+.book-image{
+  height: 500px;
+  width: 400px;
+}
+span{
+  color: blue;
+}
+</style>
