@@ -30,12 +30,16 @@ class Api::BooksController < Api::ApplicationController
   end
 
   def convert_isbn
-    if check_isbn_10(params[:isbn])
-      isbn_13 = convert_to_isbn_13(params[:isbn])
-      render json: {isbn_13: isbn_13}, status: :ok
-    elsif check_isbn_13(params[:isbn])
-      isbn_10 = convert_to_isbn_10(params[:isbn])
-      render json: { isbn_10: isbn_10},status: :ok
+    if params[:isbn].present?
+      if check_isbn_10(params[:isbn])
+        isbn_13 = convert_to_isbn_13(params[:isbn])
+        render json: {isbn_13: isbn_13}, status: :ok
+      elsif check_isbn_13(params[:isbn])
+        isbn_10 = convert_to_isbn_10(params[:isbn])
+        render json: { isbn_10: isbn_10},status: :ok
+      else
+        render json: { error: 'Invalid ISBN-13'}, status: :bad_request
+      end
     else
       render json: { error: 'Invalid ISBN-13'}, status: :bad_request
     end
@@ -46,10 +50,14 @@ class Api::BooksController < Api::ApplicationController
   def find_book
     #  The response code for a request with an invalid ISBN-13 should be 400.
     #  check if isbn13 is valid 
-    isbn13_valid = check_isbn_13(params[:isbn_13])
-    if isbn13_valid
-      isbn13 = params[:isbn_13].gsub("-","")
-      @book = Book.find_by(isbn_13: isbn13)
+    if params[:isbn_13].present?
+      isbn13_valid = check_isbn_13(params[:isbn_13])
+      if isbn13_valid
+        isbn13 = params[:isbn_13].gsub("-","")
+        @book = Book.find_by(isbn_13: isbn13)
+      else
+        render json: { error: 'Invalid ISBN-13'}, status: :bad_request
+      end
     else
       render json: { error: 'Invalid ISBN-13'}, status: :bad_request
     end
